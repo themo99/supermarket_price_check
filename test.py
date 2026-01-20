@@ -100,16 +100,26 @@ for product, price in items2.items():
 
 #for set in items2:
 
-paknsave = {"milk": 3, "bread": 3}
-countdown = {"milk": 4, "bread": 1}
-newworld = {"milk": 5, "bread": 4}
-
+paknsave = {"milk": 3.50, "bread": 2.99}
+countdown = {"milk": 3.80, "bread": 1}
+newworld = {"milk": 2, "bread": 3.40}
 cheapest_products = paknsave
+supermarket_dict = {}
 
-for product, price in countdown.items():
-    for low_product, low_price in cheapest_products.items():
-        if countdown[product] == cheapest_products[product] and price < low_price:
-            cheapest_products[low_price] = countdown[price]
+for i in cheapest_products.keys():   # create a new dict pointing cheapest supermarket to products
+    supermarket_dict[i] = 'paknsave'
+
+for product, price in countdown.items():  # see if countdown is cheaper than pak n save
+    for i, j in cheapest_products.items():
+        if i == product and price < j:
+            cheapest_products[i] = price
+            supermarket_dict[product] = 'countdown'
+
+for product, price in newworld.items():     # see if new world is the cheapest
+    for i, j in cheapest_products.items():
+        if i == product and price < j:
+            cheapest_products[i] = price
+            supermarket_dict[product] = 'new world'
 
 for product, price in cheapest_products.items():
-    print(f'{product:} → (${price:.2f})') 
+    print(f'{product:} → {supermarket_dict[product]} (${price:.2f})')   # Q10
